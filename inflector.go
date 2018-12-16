@@ -7,36 +7,36 @@ import (
 	"github.com/go2c/unidecode"
 )
 
-// Regular expression rule for pluralization
+// PluralizationRule represents a regular expression rule for pluralization
 type PluralizationRule struct {
 	Pattern				*regexp.Regexp
 	Replacement			string
 }
 
-// Regular expression rule for singularization
+// SingularizationRule represents a regular expression rule for singularization
 type SingularizationRule struct {
 	Pattern				*regexp.Regexp
 	Replacement			string
 }
 
-// 2 words rule for irregular nouns
+// IrregularNoun represents a 2-word rule for irregular nouns
 type IrregularNoun struct {
 	Singular			string
 	Plural				string
 }
 
-// Single word rule for uncountable nouns
+// UncountableNoun represents a single word rule for uncountable nouns
 type UncountableNoun struct {
 	Word				string
 }
 
-// Lowercase and uppercase acronym rule
+// Acronym represents a lowercase and uppercase acronym rule
 type Acronym struct {
 	Lower				string
 	Upper				string
 }
 
-// The inflector type
+// Inflector is the inflector inflector type
 type Inflector struct {
 	PluralizationRules		[]*PluralizationRule
 	SingularizationRules	[]*SingularizationRule
@@ -48,23 +48,23 @@ type Inflector struct {
 	AcronymRegexp			*regexp.Regexp
 }
 
-// First regular expression applied to `Underscore`
+// UnderscoreRegexp1 is the first regular expression applied to `Underscore`
 // Will transform FOOBar into FOO_Bar
 var	UnderscoreRegexp1 = regexp.MustCompile("([A-Z]+)([A-Z][a-z])")
 
-// Second regular expression applied to `Underscore`
+// UnderscoreRegexp2 is the second regular expression applied to `Underscore`
 // Will transform FooBar into Foo_Bar
 var	UnderscoreRegexp2 = regexp.MustCompile("([a-z\\d])([A-Z])")
 
-// Third regular expression applied to `Underscore`
+// UnderscoreRegexp3 is the third regular expression applied to `Underscore`
 // Will transform spaces and dashes into underscores
 var	UnderscoreRegexp3 = regexp.MustCompile("[\\s-]+")
 
-// First regular expression applied to `Parameterize`
+// ParameterizeRegexp1 is the first regular expression applied to `Parameterize`
 // Will remove all non-word characters
 var ParameterizeRegexp1 = regexp.MustCompile("[^\\w]")
 
-// Returns a new Inflector
+// New returns a new Inflector
 func New() *Inflector {
 	result := &Inflector{}
 	result.AcronymsLower = make(map[string]string)
@@ -72,27 +72,27 @@ func New() *Inflector {
 	return result
 }
 
-// Adds a pluralization rule
+// AddPluralizationRule adds a pluralization rule
 func (i *Inflector) AddPluralizationRule(pattern *regexp.Regexp, replacement string) {
 	i.PluralizationRules = append(i.PluralizationRules, &PluralizationRule{pattern, replacement})
 }
 
-// Adds a singularization rule
+// AddSingularizationRule adds a singularization rule
 func (i *Inflector) AddSingularizationRule(pattern *regexp.Regexp, replacement string) {
 	i.SingularizationRules = append(i.SingularizationRules, &SingularizationRule{pattern, replacement})
 }
 
-// Adds an irregular noun
+// AddIrregularNoun adds an irregular noun
 func (i *Inflector) AddIrregularNoun(singular, plural string) {
 	i.IrregularNouns = append(i.IrregularNouns, &IrregularNoun{singular, plural})
 }
 
-// Adds an uncountable noun
+// AddUncountableNoun adds an uncountable noun
 func (i *Inflector) AddUncountableNoun(word string) {
 	i.UncountableNouns = append(i.UncountableNouns, &UncountableNoun{word})
 }
 
-// Adds an acronym
+// AddAcronym adds an acronym
 func (i *Inflector) AddAcronym(lower, upper string) {
 	if _, found := i.AcronymsUpper[upper]; !found {
 		i.AcronymsUpperList = append(i.AcronymsUpperList, upper)
@@ -257,10 +257,10 @@ func Ordinalize(number int) string {
 	return DefaultInflector.Ordinalize(number)
 }
 
-// Default Inflector
+// DefaultInflector is the default inflector
 var DefaultInflector = New()
 
-// Initialization
+// Static initialization
 func init() {
 	// Default pluralization rules for english
 	DefaultInflector.AddPluralizationRule(regexp.MustCompile("(?i)(quiz)$"), "${1}zes")
@@ -307,7 +307,8 @@ func init() {
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)(hive)s$"), "${1}")
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)([^f])ves$"), "${1}fe")
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)(^analy)(sis|ses)$"), "${1}sis")
-	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(sis|ses)$"),"${1}sis")
+	DefaultInflector.AddSingularizationRule(
+		regexp.MustCompile("(?i)((a)naly|(b)a|(d)iagno|(p)arenthe|(p)rogno|(s)ynop|(t)he)(sis|ses)$"), "${1}sis")
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)([ti])a$"), "${1}um")
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)(n)ews$"), "${1}ews")
 	DefaultInflector.AddSingularizationRule(regexp.MustCompile("(?i)(ss)$"), "${1}")
