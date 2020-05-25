@@ -2,63 +2,64 @@ package inflector
 
 import (
 	"regexp"
-	"strings"
 	"strconv"
+	"strings"
+
 	"github.com/go2c/unidecode"
 )
 
 // PluralizationRule represents a regular expression rule for pluralization
 type PluralizationRule struct {
-	Pattern				*regexp.Regexp
-	Replacement			string
+	Pattern     *regexp.Regexp
+	Replacement string
 }
 
 // SingularizationRule represents a regular expression rule for singularization
 type SingularizationRule struct {
-	Pattern				*regexp.Regexp
-	Replacement			string
+	Pattern     *regexp.Regexp
+	Replacement string
 }
 
 // IrregularNoun represents a 2-word rule for irregular nouns
 type IrregularNoun struct {
-	Singular			string
-	Plural				string
+	Singular string
+	Plural   string
 }
 
 // UncountableNoun represents a single word rule for uncountable nouns
 type UncountableNoun struct {
-	Word				string
+	Word string
 }
 
 // Acronym represents a lowercase and uppercase acronym rule
 type Acronym struct {
-	Lower				string
-	Upper				string
+	Lower string
+	Upper string
 }
 
 // Inflector is the inflector inflector type
 type Inflector struct {
-	PluralizationRules		[]*PluralizationRule
-	SingularizationRules	[]*SingularizationRule
-	IrregularNouns			[]*IrregularNoun
-	UncountableNouns		[]*UncountableNoun
-	AcronymsLower			map[string]string
-	AcronymsUpper			map[string]string
-	AcronymsUpperList		[]string
-	AcronymRegexp			*regexp.Regexp
+	PluralizationRules   []*PluralizationRule
+	SingularizationRules []*SingularizationRule
+	IrregularNouns       []*IrregularNoun
+	UncountableNouns     []*UncountableNoun
+	AcronymsLower        map[string]string
+	AcronymsUpper        map[string]string
+	AcronymsUpperList    []string
+	AcronymRegexp        *regexp.Regexp
 }
 
 // UnderscoreRegexp1 is the first regular expression applied to `Underscore`
 // Will transform FOOBar into FOO_Bar
-var	UnderscoreRegexp1 = regexp.MustCompile("([A-Z]+)([A-Z][a-z])")
+var UnderscoreRegexp1 = regexp.MustCompile("([A-Z]+)([A-Z][a-z])")
 
 // UnderscoreRegexp2 is the second regular expression applied to `Underscore`
 // Will transform FooBar into Foo_Bar
-var	UnderscoreRegexp2 = regexp.MustCompile("([a-z\\d])([A-Z])")
+var UnderscoreRegexp2 = regexp.MustCompile("([a-z\\d])([A-Z])")
 
 // UnderscoreRegexp3 is the third regular expression applied to `Underscore`
 // Will transform spaces and dashes into underscores
-var	UnderscoreRegexp3 = regexp.MustCompile("[\\s-]+")
+var UnderscoreRegexp3 = regexp.MustCompile("[\\s-]+")
 
 // ParameterizeRegexp1 is the first regular expression applied to `Parameterize`
 // Will remove all non-word characters
@@ -184,7 +185,7 @@ func (i *Inflector) Pluralize(word string) string {
 
 	for _, rule := range i.IrregularNouns {
 		if strings.HasSuffix(lower, rule.Singular) {
-			return word[0:len(word) - len(rule.Singular)] + rule.Plural
+			return word[0:len(word)-len(rule.Singular)] + rule.Plural
 		}
 		if strings.HasSuffix(lower, rule.Plural) {
 			return word
@@ -217,7 +218,7 @@ func (i *Inflector) Singularize(word string) string {
 
 	for _, rule := range i.IrregularNouns {
 		if strings.HasSuffix(lower, rule.Plural) {
-			return word[0:len(word) - len(rule.Plural)] + rule.Singular
+			return word[0:len(word)-len(rule.Plural)] + rule.Singular
 		}
 		if strings.HasSuffix(lower, rule.Singular) {
 			return word
@@ -240,15 +241,19 @@ func Singularize(word string) string {
 
 // Ordinalize ordinalizes a number
 func (i *Inflector) Ordinalize(number int) string {
-	if number % 100 >= 11 && number % 100 <= 13 {
+	if number%100 >= 11 && number%100 <= 13 {
 		return strconv.Itoa(number) + "th"
 	}
 
 	switch number % 10 {
-	case 1: return strconv.Itoa(number) + "st"
-	case 2: return strconv.Itoa(number) + "nd"
-	case 3: return strconv.Itoa(number) + "rd"
-	default: return strconv.Itoa(number) + "th"
+	case 1:
+		return strconv.Itoa(number) + "st"
+	case 2:
+		return strconv.Itoa(number) + "nd"
+	case 3:
+		return strconv.Itoa(number) + "rd"
+	default:
+		return strconv.Itoa(number) + "th"
 	}
 }
 
