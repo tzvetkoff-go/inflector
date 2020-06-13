@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/go2c/inflector"
+	"github.com/tzvetkoff-go/inflector"
 )
 
 type test struct {

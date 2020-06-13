@@ -1,7 +1,7 @@
 # The Inflector transforms words in various ways
 
-[![GoDoc](https://godoc.org/github.com/go2c/inflector?status.svg)](http://godoc.org/github.com/go2c/inflector)
-[![Build Status](https://travis-ci.org/go2c/inflector.svg?branch=master)](https://travis-ci.org/go2c/inflector)
+[![GoDoc](https://godoc.org/github.com/tzvetkoff-go/inflector?status.svg)](http://godoc.org/github.com/tzvetkoff-go/inflector)
+[![Build Status](https://travis-ci.org/tzvetkoff-go/inflector.svg?branch=master)](https://travis-ci.org/tzvetkoff-go/inflector)
 
 A Go port of the [Rails](http://rubyonrails) Inflector.
 
@@ -11,7 +11,7 @@ A Go port of the [Rails](http://rubyonrails) Inflector.
 package main
 
 import (
-	"github.com/go2c/inflector"
+	"github.com/tzvetkoff-go/inflector"
 )
 
 func main() {

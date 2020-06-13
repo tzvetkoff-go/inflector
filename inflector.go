@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/go2c/unidecode"
+	"github.com/tzvetkoff-go/unidecode"
 )
 
 // PluralizationRule represents a regular expression rule for pluralization

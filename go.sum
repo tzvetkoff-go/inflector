@@ -1,2 +1,2 @@
-github.com/go2c/unidecode v1.30.0 h1:TiPITWr/T0sk1BbgpK05y/0qEarZQfxmsiPh+VUw100=
-github.com/go2c/unidecode v1.30.0/go.mod h1:6I4SOHOhmDSqihhsdpCy4yBIkmWWKCsskq08w3CWgu4=
+github.com/tzvetkoff-go/unidecode v0.0.0-20200613142319-291c72f6f438 h1:XBCfI+UYFBlWrSA073RpS+5e8VJfi8+WotLIRHyP3Wo=
+github.com/tzvetkoff-go/unidecode v0.0.0-20200613142319-291c72f6f438/go.mod h1:Iq9aDtuqrL9g5HkNtEXFUloCKX31kLIWjUCShg15tOk=
