@@ -1,4 +1,2 @@
-github.com/tzvetkoff-go/unidecode v0.0.0-20200613142319-291c72f6f438 h1:XBCfI+UYFBlWrSA073RpS+5e8VJfi8+WotLIRHyP3Wo=
-github.com/tzvetkoff-go/unidecode v0.0.0-20200613142319-291c72f6f438/go.mod h1:Iq9aDtuqrL9g5HkNtEXFUloCKX31kLIWjUCShg15tOk=
-github.com/tzvetkoff-go/unidecode v0.0.0-20201206092708-23aac4535f4f h1:7VUPqgHbg6d7vNyx37EjJTTpAX6PlJQ2dCQGtmBfvWQ=
-github.com/tzvetkoff-go/unidecode v0.0.0-20201206092708-23aac4535f4f/go.mod h1:Iq9aDtuqrL9g5HkNtEXFUloCKX31kLIWjUCShg15tOk=
+github.com/tzvetkoff-go/unidecode v0.0.0-20201209194450-5a3c1fb3e90c h1:5ynhaUVFj+50Ow7MyC0uu32JZQj6lbP7oz6T0v0NyDY=
+github.com/tzvetkoff-go/unidecode v0.0.0-20201209194450-5a3c1fb3e90c/go.mod h1:Iq9aDtuqrL9g5HkNtEXFUloCKX31kLIWjUCShg15tOk=
